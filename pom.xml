@@ -8,22 +8,32 @@
 		<version>3.1.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+	
 	<groupId>com.rupesh.blogapp</groupId>
 	<artifactId>blog-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>blog-app</name>
 	<description>Blog App for Blogging</description>
+	
 	<properties>
 		<java.version>17</java.version>
 	</properties>
+	
 	<dependencies>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation -->
@@ -48,12 +58,31 @@
 			<artifactId>mysql-connector-j</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
 		<dependency>
+		    <groupId>io.jsonwebtoken</groupId>
+		    <artifactId>jjwt</artifactId>
+		    <version>0.9.1</version>
+		</dependency>
+
+       <dependency>
+        <groupId>javax.xml.bind</groupId>
+        <artifactId>jaxb-api</artifactId>
+        <version>2.2.7</version>
+    </dependency>
+    
+    <dependency>
+        <groupId>com.sun.xml.bind</groupId>
+        <artifactId>jaxb-impl</artifactId>
+        <version>2.2.5-b10</version>
+    </dependency>
+     
+      <dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
-		
+			
 		<!-- https://mvnrepository.com/artifact/org.modelmapper/modelmapper -->
         <dependency>
             <groupId>org.modelmapper</groupId>
@@ -67,6 +96,13 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
