@@ -6,6 +6,8 @@ import com.rupesh.blogapp.blogapp.dto.UserDto;
 
 public interface UserService {
 
+	UserDto registerNewUser(UserDto userDto);
+	
 	UserDto createUser(UserDto userDto);
 	
 	UserDto updateUser(UserDto userDto, Integer userId);

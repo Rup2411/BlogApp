@@ -63,7 +63,7 @@ public class UserEntity implements UserDetails {
 	@JoinTable(name = "user_role",
 	joinColumns = @JoinColumn(name = "user", referencedColumnName = "userId"),
 	inverseJoinColumns = @JoinColumn(name = "role", referencedColumnName = "id"))
-	private Set<Role> roles = new HashSet<>();
+	private Set<RoleEntity> roles = new HashSet<>();
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

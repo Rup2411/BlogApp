@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rupesh.blogapp.blogapp.dto.JwtAuthRequestDto;
 import com.rupesh.blogapp.blogapp.dto.JwtAuthResponseDto;
+import com.rupesh.blogapp.blogapp.dto.UserDto;
+import com.rupesh.blogapp.blogapp.exceptions.ApiException;
 import com.rupesh.blogapp.blogapp.security.JwtTokenHelper;
+import com.rupesh.blogapp.blogapp.services.UserService;
 
 @RestController
 @RequestMapping("/auth/")
@@ -30,6 +33,9 @@ public class AuthController {
 	
 	@Autowired
 	AuthenticationManager authenticationManager;
+	
+	@Autowired
+	UserService userService;
 	
 //	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/login")
@@ -62,7 +68,15 @@ public class AuthController {
 		}
 		catch (BadCredentialsException e){
 			
-			throw new Exception("Invalid Username or Password");
+			throw new ApiException("Invalid Username or Password");
 		}
+	}
+	
+	@PostMapping("/register")
+	public ResponseEntity<UserDto> registerNewUser(@RequestBody UserDto userDto) {
+		
+		UserDto registeredUser = this.userService.registerNewUser(userDto);
+		
+		return new ResponseEntity<UserDto> (registeredUser, HttpStatus.CREATED);
 	}
 }

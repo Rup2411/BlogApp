@@ -5,10 +5,14 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.rupesh.blogapp.blogapp.exceptions.ResourceNotFoundException;
+import com.rupesh.blogapp.blogapp.config.AppConstants;
 import com.rupesh.blogapp.blogapp.dto.UserDto;
+import com.rupesh.blogapp.blogapp.entities.RoleEntity;
 import com.rupesh.blogapp.blogapp.entities.UserEntity;
+import com.rupesh.blogapp.blogapp.repositories.RoleRepository;
 import com.rupesh.blogapp.blogapp.repositories.UserRepository;
 import com.rupesh.blogapp.blogapp.services.UserService;
 
@@ -20,6 +24,28 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	ModelMapper modelMapper;
+	
+	@Autowired
+	PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	RoleRepository roleRepository;
+	
+	@Override
+	public UserDto registerNewUser(UserDto userDto) {
+		
+		UserEntity userEntity = this.dtoToUser(userDto);
+		
+		userEntity.setPassword(this.passwordEncoder.encode(userDto.getPassword()));
+		
+		RoleEntity roleEntity = this.roleRepository.findById(AppConstants.ROLE_USER).get();
+		
+		userEntity.getRoles().add(roleEntity);
+		
+		UserEntity newUser = this.userRepository.saveAndFlush(userEntity);
+		
+		return this.userToDto(newUser);
+	}
 	
 	@Override
 	public UserDto createUser(UserDto userDto) {
@@ -105,5 +131,7 @@ public class UserServiceImpl implements UserService {
 		*/
 		return userDto;
 	}
+
+	
 
 }

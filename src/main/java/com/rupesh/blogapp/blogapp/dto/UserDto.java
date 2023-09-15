@@ -1,6 +1,10 @@
 package com.rupesh.blogapp.blogapp.dto;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import com.rupesh.blogapp.blogapp.entities.RoleEntity;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -38,4 +42,6 @@ public class UserDto {
 	private String about;
 	
 	private List<CommentDto> comments;
+	
+	private Set<RoleDto> roles = new HashSet<>();
 }
